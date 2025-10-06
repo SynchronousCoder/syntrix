@@ -19,7 +19,7 @@ const Lastpara = ({ btnAnimation }) => {
         <motion.img
           ref={img}
           className="h-full w-full lg:mt-0 -mt-[4vh]"
-          src="https://i.pinimg.com/736x/5e/e8/86/5ee886294bfed20c48cd3a80e9a789a6.jpg"
+          src="./public/img/aboutus.png"
           alt=""
           animate={{ scale: isActive ? 1.2 : 1 }}   // 🔑 Scale effect
           transition={{ duration: 0.5, ease: "easeInOut" }}

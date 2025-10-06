@@ -19,7 +19,7 @@ const Sendmail = () => {
   };
 
   return (
-    <div className="min-h-[150vh] w-full bg-[#F1F1F1] px-[4vw] py-[2vh] overflow-y-auto">
+    <div className="min-h-[150vh] w-full bg-[#F1F1F1] px-[4vw] py-[2vh] overflow-y-auto text-[#212121]">
       {/* Header Section */}
       <div className="pt-[17vh] pb-[6vh]">
         {["Let's Start", "a project together"].map((item, index) => {

@@ -14,7 +14,7 @@ const Company = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: divider.current,
-        markers: true,
+        // markers: true,
         start: "top 45%",
         end: "top 30%",
         scrub: 1

@@ -6,20 +6,20 @@ import { link } from "motion/react-client";
 const Featured = () => {
   const data = [
     {
-      name1: "Project1",
-      img1: "https://ochi.design/wp-content/uploads/2025/02/Salience_Website_cover-1326x1101.png",
-      link1: "https://www.google.com/",
-      name2: "Project2",
-      img2: "https://ochi.design/wp-content/uploads/2025/02/Salience_Website_cover-1326x1101.png",
-      link2: "https://www.facebook.com/"
+      name1: "K72",
+      img1: "./public/project/prjk.png",
+      link1: "https://k72-8ed3.onrender.com",
+      name2: "ReconnectX",
+      img2: "./public/project/prjx.png",
+      link2: "https://reconnect-x-zeta.vercel.app/"
     },
     {
-      name1: "Project3",
-      img1: "https://ochi.design/wp-content/uploads/2025/02/Salience_Website_cover-1326x1101.png",
-      link1: "https://www.godaddy.com/en-in",
-      name2: "Project4",
-      img2: "https://ochi.design/wp-content/uploads/2025/02/Salience_Website_cover-1326x1101.png",
-      link2: "https://www.instagram.com/",
+      name1: "Finance",
+      img1: "./public/project/prj2.png",
+      link1: "https://knowyourfd.vercel.app/",
+      name2: "Skills4Good",
+      img2: "./public/project/prjaar2.png",
+      link2: "https://skills4good.vercel.app/",
     },
   ];
 

@@ -8,7 +8,7 @@ const textVariants = {
 
 const ProjectCard = ({ img1, name1, img2, name2, link1, link2,  idx, handleHoverEnd, handleHover, cards }) => {
   return (
-    <div className="flex lg:flex-row flex-col lg:gap-5 lg:pt-0 pt-[20vh] w-full">
+    <div className="flex lg:flex-row flex-col lg:gap-5 lg:pt-0 pt-[20vh] w-full text-[#57D4FF]">
       {/* First Card */}
       <motion.div
         onHoverStart={() => handleHover(idx)}
