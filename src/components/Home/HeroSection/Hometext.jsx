@@ -16,7 +16,7 @@ const Hometext = () => {
             className="lg:h-[11vh] lg:w-[12vw] h-[11vw] w-[14vw] object-cover lg:rounded-2xl rounded-[1vh] overflow-hidden lg:-top-[1.5vw]"
           >
             <img
-              src="../public/img/imgSyntrix.png"
+              src="/img/imgSyntrix.png"
               alt="strip"
               className="h-full w-full object-cover"
             />

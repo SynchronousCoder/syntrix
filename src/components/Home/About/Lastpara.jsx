@@ -10,7 +10,12 @@ const Lastpara = ({ btnAnimation }) => {
     <div className="w-full h-full lg:px-[6vh] px-[2vh] font-[font2] text-[#212121] flex lg:flex-row flex-col justify-between items-center pt-[6vh] pb-[5vh]">
       
       {/* Button / Text */}
-      <Link to={"/about"} className="  lg:relative lg:mt-0  lg:scale-100 absolute mt-[37vh] scale-75 " onMouseEnter={() => setIsActive(!isActive)}  onMouseLeave={() => setIsActive(!isActive)}>
+      <Link 
+        to={"/about"} 
+        className="lg:relative lg:mt-0 lg:scale-100 absolute mt-[37vh] scale-75" 
+        onMouseEnter={() => setIsActive(true)}  
+        onMouseLeave={() => setIsActive(false)}
+      >
         {btnAnimation({ char: "know more", key: 1 })}
       </Link>
 
@@ -18,10 +23,10 @@ const Lastpara = ({ btnAnimation }) => {
       <div className="lg:h-[62vh] lg:w-[48vw] lg:pb-0 pb-[5vh] rounded-2xl overflow-hidden">
         <motion.img
           ref={img}
-          className="h-full w-full lg:mt-0 -mt-[4vh]"
-          src="./public/img/aboutus.png"
-          alt=""
-          animate={{ scale: isActive ? 1.2 : 1 }}   // 🔑 Scale effect
+          className="h-full w-full lg:mt-0 -mt-[4vh] object-cover"
+          src="/img/aboutus.png"  // ✅ CORRECTED PATH
+          alt="About Us"
+          animate={{ scale: isActive ? 1.2 : 1 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         />
       </div>

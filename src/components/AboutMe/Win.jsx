@@ -8,7 +8,7 @@ const Win = () => {
         {/* Card 1 */}
         <div className="relative w-full flex lg:flex-row flex-col items-center justify-center lg:md:w-1/2">
           <img
-            src="../public/img/engage.png"
+            src="/img/engage.png"  // ✅ CORRECTED PATH
             alt="Engaging Experiences"
             className="lg:w-full lg:h-[50vh] object-cover rounded-2xl opacity-75" // reduced opacity
           />
@@ -28,7 +28,7 @@ const Win = () => {
         {/* Card 2 */}
         <div className="relative w-full flex lg:flex-row flex-col items-center justify-center md:w-1/2">
           <img
-            src="../public/img/design.png"
+            src="/img/design.png"  // ✅ CORRECTED PATH
             alt="Performing Design"
             className="lg:w-full lg:h-[50vh] object-cover rounded-2xl opacity-75" // reduced opacity
           />
@@ -39,7 +39,7 @@ const Win = () => {
             Performing Design
           </h1>
           <p className="lg:text-[1.25vw] text-[4.25vw] font-[font2] text-base opacity-60 text-center lg:w-[80%] w-[90%] lg:mt-[0vh] mt-[5vh]">
-            Our designs don’t just look good—they work hard. We blend creativity
+            Our designs don't just look good—they work hard. We blend creativity
             with performance to craft websites that are beautiful, fast, and
             results-driven.
           </p>

@@ -1,24 +1,23 @@
 import React from "react";
 import { useAnimation } from "motion/react";
 import ProjectCard from "../../components/Home/Projects/ProjectCard";
-import { link } from "motion/react-client";
 
 const Featured = () => {
   const data = [
     {
       name1: "K72",
-      img1: "./public/project/prjk.png",
+      img1: "/project/prjk.png",
       link1: "https://k72-8ed3.onrender.com",
       name2: "ReconnectX",
-      img2: "./public/project/prjx.png",
+      img2: "/project/prjx.png",
       link2: "https://reconnect-x-zeta.vercel.app/"
     },
     {
       name1: "Finance",
-      img1: "./public/project/prj2.png",
+      img1: "/project/prj2.png",
       link1: "https://knowyourfd.vercel.app/",
       name2: "Skills4Good",
-      img2: "./public/project/prjaar2.png",
+      img2: "/project/prjaar2.png",
       link2: "https://skills4good.vercel.app/",
     },
   ];

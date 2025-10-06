@@ -43,7 +43,7 @@ const Nav = () => {
       <div className="backdrop-blur-[2px] bg-white/30 h-[8vh] flex justify-between items-center lg:px-[6vh] px-[2vh]">
         {/* ===== Logo ===== */}
         <Link to={"/"} className="block lg:w-32 w-[19vw] cursor-pointer">
-          <img src="./public/logo.svg" alt="" />
+          <img src="/logo.svg" alt="Syntrix Logo" /> {/* ✅ CORRECTED PATH */}
         </Link>
 
         {/* ===== Nav Items ===== */}
