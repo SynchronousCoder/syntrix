@@ -1,0 +1,292 @@
+text color bg-[#212121]
+
+The code recom!! by Claude:
+//final code:
+  // const loader = useRef(null);
+  // const percent = useRef(null);
+  // const [count, setcount] = useState(0);
+  //  // Initial animation
+  // useGSAP(() => {
+  //   gsap.from(loader.current, {
+  //     y: 1200,
+  //     duration: 0.4
+  //   });
+  // }, []);
+
+  // // Counter effect
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setcount(prevCount => {
+  //       if(prevCount >= 100){
+  //         clearInterval(interval);
+  //         return 100;
+  //       }
+  //       return prevCount + 1;
+  //     });
+  //   }, 25);
+    
+  //   return () => clearInterval(interval);
+  // }, []); // Empty dependency array
+
+  // // Scale animation when count reaches 100
+  // useEffect(() => {
+  //   if (count === 100) {
+  //     const tl = gsap.timeline();
+  //     tl.to(loader.current, {
+  //       scale: 1,
+  //       duration: 0.5,
+  //       delay: 0.2
+  //     })
+  //     .to(percent.current, {
+  //       opacity: 0,
+  //       duration: 0.3
+  //     }, "-=0.6"); // Start opacity animation 0.3s before scale ends
+  //   }
+  // }, [count]); // Runs when count changes
+
+
+
+
+
+        {/* Navbar single component code */}
+      {/* <div className="relative h-10 w-24 flex justify-center items-center mx-auto mt-10 group cursor-pointer overflow-hidden">
+        <div className="relative h-6 w-full flex justify-center items-center overflow-hidden">
+          <h1 className="absolute transform translate-y-0 transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+            Scroll Down
+          </h1>
+
+          <h1 class="absolute transform translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+            Let's Go Up
+          </h1>
+        </div>
+
+        <span class="absolute left-0 bottom-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:w-full"></span>
+      </div> */}
+
+
+      //NAVBAR OUTDATED CODE:
+      // import React from "react";
+// import { Link } from "react-router-dom";
+
+// const Nav = () => {
+//   return (
+//     <div className="h-[10vh] w-full fixed top-0  z-20 py-[2vh] px-[6vh]">
+
+//       <div className="flex justify-between items-center">
+//         <div className="block w-32 text-white cursor-pointer">
+//           <svg
+//             className="w-full"
+//             xmlns="http://www.w3.org/2000/svg"
+//             viewBox="0 0 103 44"
+//           >
+//             <path
+//               fill="#212121"
+//               fillRule="evenodd"
+//               d="M35.1441047,8.4486911 L58.6905011,8.4486911 L58.6905011,-1.3094819e-14 L35.1441047,-1.3094819e-14 L35.1441047,8.4486911 Z M20.0019577,0.000230366492 L8.83414254,25.3433089 L18.4876971,25.3433089 L29.5733875,0.000230366492 L20.0019577,0.000230366492 Z M72.5255345,0.000691099476 L72.5255345,8.44846073 L94.3991559,8.44846073 L94.3991559,16.8932356 L72.5275991,16.8932356 L72.5275991,19.5237906 L72.5255345,19.5237906 L72.5255345,43.9274346 L102.80937,43.9274346 L102.80937,35.4798953 L80.9357483,35.4798953 L80.9357483,25.3437696 L94.3996147,25.3428482 L94.3996147,16.8953089 L102.80937,16.8953089 L102.80937,0.000691099476 L72.5255345,0.000691099476 Z M-1.30398043e-14,43.9278953 L8.78642762,43.9278953 L8.78642762,0.0057591623 L-1.30398043e-14,0.0057591623 L-1.30398043e-14,43.9278953 Z M58.6849955,8.4486911 L43.1186904,43.9274346 L52.3166592,43.9274346 L67.9877996,8.4486911 L58.6849955,8.4486911 Z M18.4688864,25.3437696 L26.7045278,43.9278953 L36.2761871,43.9278953 L28.1676325,25.3375497 L18.4688864,25.3437696 Z"
+//             ></path>
+//           </svg>
+//         </div>
+
+//         <div className="flex items-center">
+//           {["services", "our work", "about us"].map((item, index) => {
+//             return (
+//               <div key={index} className="relative h-10 w-24 flex justify-center items-center group cursor-pointer overflow-hidden">
+//                 <div  className="relative h-6 w-full font-[font2] text-[#212121] flex justify-center items-center overflow-hidden">
+//                   <h1 className="uppercase absolute transform translate-y-0 transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+//                     {item}
+//                   </h1>
+
+//                   <h1 className="uppercase absolute transform translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+//                     {item}
+//                   </h1>
+//                 </div>
+
+//                 <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:w-full"></span>
+//               </div>
+//             );
+//           })}
+//         </div>
+
+//         <div className="relative h-10 w-24 flex justify-center items-center group cursor-pointer overflow-hidden">
+//           <div className="relative h-6 w-full font-[font2] text-[#212121] flex justify-center items-center overflow-hidden">
+//             <h1 className="absolute transform translate-y-0 transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+//               Contact Us
+//             </h1>
+
+//             <h1 className="absolute transform translate-y-full transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+//               Contact Us
+//             </h1>
+//           </div>
+
+//           <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:w-full"></span>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Nav;
+
+
+// <div className="Midserve relative bg-red-100 w-full h-[80vh]">
+//   <div className="1card relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+//     <div className="absolute z-10 h-[30vh] w-[22vw] overflow-hidden rounded-[1rem]">
+//       <div
+//         className="h-full w-full border-[1vh] border-transparent"
+//         style={{
+//           borderImage:
+//             "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
+//         }}
+//       ></div>
+//     </div>
+
+//     <div className="absolute h-[30vh] w-[22vw] overflow-hidden rounded-[1rem]">
+//       <div
+//         className="h-full w-full border-[1vh] border-transparent blommBorder"
+//         style={{
+//           borderImage:
+//             "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
+//         }}
+//       ></div>
+//     </div>
+//   </div>
+
+// </div>
+
+server code:// import { useGSAP } from "@gsap/react";
+// import React, { useRef } from "react";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import gsap from "gsap";
+// import Midserve from "./Midserve";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// const Serve = () => {
+//   const content = [
+//     {
+//       title1: "Web Design",
+//       line1:
+//         "Pixel-perfect layouts that balance creativity and clarity. We craft designs that not only look stunning but also drive results",
+//       title2: "UI / UX Strategy",
+//       line2:
+//         "Human-first interfaces with smooth journeys. From wireframes to prototypes, every click feels effortless",
+//     },
+//     {
+//       title1: "Web Dev",
+//       line1:
+//         "Fast, responsive, and scalable websites powered by clean code. Built to perform across every screen and platform",
+//       title2: "Digital Storytelling",
+//       line2:
+//         "Immersive motion and interactive design that breathe life into your brand and keep users engaged",
+//     },
+//   ];
+
+//   const mainPage = useRef(null);
+//   const changeColor = useRef(null);
+
+//   useGSAP(function () {
+//     gsap.to(mainPage.current, {
+//       backgroundColor: "#0C0C0C",
+//       color: "#fff",
+//       ease: "power2.out",
+//       scrollTrigger: {
+//         trigger: changeColor.current,
+//         markers: true,
+//         start: "top 50%",
+//         end: "top 30%",
+//         scrub: true,
+//       },
+//     });
+//   });
+
+//   return (
+//     <div
+//       ref={mainPage}
+//       className="h-[220vh] w-full bg-[#F1F1F1] text-[#212121]"
+//     >
+//       <div className="pt-[13vh] px-[6vh]">
+//         <h1 className="font-[font1] text-[9.2vw] uppercase">
+//           Services That Scale
+//         </h1>
+//       </div>
+//       {/* Divider */}
+//       <div className="mt-[5vh] h-[.2vh] w-full bg-[#212121] opacity-20 mb-[4vh]"></div>
+
+//       <div className="px-[6vh] w-[85vw]">
+//         <p className="font-[font2] text-[3.5vw] leading-[3.5vw]">
+//           We design & build digital experiences with motion-first design, clean
+//           code, and bold creativity.
+//         </p>
+//       </div>
+
+//       {/* Divider */}
+//       <div className="mt-[5vh] h-[.2vh] w-full bg-[#212121] opacity-20 mb-[4vh]"></div>
+
+//       <div
+//         ref={changeColor}
+//         className=" w-full h-[40vh] flex justify-center items-center"
+//       >
+//         {" "}
+//         <h1
+//           className="z-[2]  absolute text-[8.4vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+//         bg-clip-text text-transparent"
+//         >
+//           GET OUTSHINED{" "}
+//         </h1>
+//         <h1
+//           className="bloom absolute text-[8.4vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+//         bg-clip-text text-transparent"
+//         >
+//           GET OUTSHINED{" "}
+//         </h1>
+//       </div>
+//       <div className="h-[6vh] w-[45vw] relative mx-auto -top-[13vh]">
+//         <p className="font-[font2] capitalize text-[2.7vw] text-center">
+//           Because ordinary isn’t our language
+//         </p>
+//       </div>
+
+//       {/* <Midserve /> */}
+
+//       <div className="Midserve relative w-full h-[120vh] flex items-center justify-center">
+//         <div className="flex flex-wrap justify-center gap-[10vw] w-[80%]">
+//           {/* Card 1 */}
+//           <div className="relative h-[40vh] w-[32vw] overflow-hidden rounded-[6rem]">
+//             {/* Glow Border Layer */}
+//             <div
+//               className="absolute inset-0 border-[.7vh] border-transparent blommBorder"
+//               style={{
+//                 borderImage:
+//                   "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
+//               }}
+//             ></div>
+//             {/* Main Border Layer */}
+//             <div
+//               className="absolute inset-0 border-[.7vh] border-transparent flex flex-col justify-start items-center px-[2vh] py-[4vh]"
+//               style={{
+//                 borderImage:
+//                   "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
+//               }}
+//             >
+//               {" "}
+//               <div
+//                 className="bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+//         bg-clip-text text-transparent text-center"
+//               >
+//                 <h1 className="font-[font1] text-[6vw] mb-[1vw] uppercase">
+//                   Web Design
+//                 </h1>
+//                 <h3 className="text-center font-[font2]">
+//                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+//                   Quidem ut commodi autem, repudiandae reiciendis voluptate.
+//                 </h3>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Serve;

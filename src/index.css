@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+body{
+  background-color: #F1F1F1;
+}
+
+@font-face {
+  font-family: font1;
+  src: url(../public/font/FoundersGrotesk-Semibold.woff);
+}
+@font-face {
+  font-family: font2;
+  src: url(../public/font/NeueMontreal-Regular.woff);
+}
+
+/* Ultra smooth version */
+.scrollDown {
+  animation: textdown 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+@keyframes textdown {
+  0%,
+  30% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  70%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+.hero2{
+  filter: blur(30px);
+  animation-name: anime1;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+.hero1{
+  filter: blur(30px);
+  animation-name: anime2;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+@keyframes anime1 {
+  from{
+    transform: translate(0%, 0%);
+    scale: 100%;
+  }
+    to{
+    transform: translate(-20%, 20%);
+    scale: 150%;
+  }
+}
+@keyframes anime2 {
+  from{
+    transform: translate(0%, 0%);
+        scale: 100%;
+
+  }
+    to{
+    transform: translate(10%, -10%);
+    scale: 160%;
+  }
+}
+.syntrix-outline {
+  -webkit-text-stroke: 7px black; /* outline thickness aur color */
+}
+.syntrix-outline1 {
+  -webkit-text-stroke: 3px black; /* outline thickness aur color */
+}
+
+.bloom{
+  filter: blur(60px) saturate(1);
+   mix-blend-mode: screen;
+}
+.blommBorder{
+  filter: blur(10px) saturate(1);
+   mix-blend-mode: screen;  
+}
