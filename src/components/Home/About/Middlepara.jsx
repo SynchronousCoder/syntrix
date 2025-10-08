@@ -50,13 +50,13 @@ const Middlepara = ({ btnAnimation }) => {
       <div className="">
         <h2 className="lg:text-[1.4vw] text-[4.5vw] lg:mb-0 mb-[4vh]">Social: </h2>
         <h3 className="lg:text-[1.2vw] text-[4vw] underline">
-          <a href="https://www.youtube.com/syntrix">Youtube</a>
+          <a href="">Youtube</a>
         </h3>
         <h3 className="lg:text-[1.2vw] text-[4vw] underline">
-          <a href="https://www.instagram.com/syntrix">Instagram</a>
+          <a href="">Instagram</a>
         </h3>
         <h3 className="lg:text-[1.2vw] text-[4vw] underline">
-          <a href="https://www.linkedin.com/company/syntrix">LinkedIn</a>
+          <a href="">LinkedIn</a>
         </h3>
       </div>
     </div>

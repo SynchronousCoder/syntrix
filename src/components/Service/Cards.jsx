@@ -32,7 +32,7 @@ const Card = ({ title, line, idx }) => {
   return (
     <div
       ref={card}
-      className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[90%] overflow-hidden rounded-[6rem]"
+      className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%] overflow-hidden rounded-[6rem]"
     >
       {/* Glow Border Layer */}
       <div
@@ -56,7 +56,7 @@ const Card = ({ title, line, idx }) => {
           className="bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
           bg-clip-text text-transparent text-center"
         >
-          <h1 className="font-[font1] lg:text-[6vw] text-[10vw] lg:mb-[2vw] mb-[2.4vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
+          <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
             {title}
           </h1>
           <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>

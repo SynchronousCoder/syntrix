@@ -78,10 +78,14 @@ const Nav = () => {
           className="lg:mr-0 -mr-[4vh] lg:font-normal font-bold relative lg:h-[3vw] lg:w-[8vw] w-[26vw] flex lg:justify-center items-center group cursor-pointer overflow-hidden lg:scale-100 scale-70"
         >
           <div className=" relative h-11 w-full font-[font2] text-[#212121] flex justify-center items-center overflow-hidden">
-            <h1 className="absolute transform translate-y-0 transition-transform duration-500 ease-in-out group-hover:-translate-y-[200%]">
-              CONTACT US
+            <h1 className="absolute transform translate-y-0 lg:opacity-0 text-[4vw]  transition-transform duration-500 ease-in-out group-hover:-translate-y-[200%]">
+              CONTACT 
             </h1>
 
+
+            <h1 className="absolute transform translate-y-0 lg:opacity-100 opacity-0 transition-transform duration-500 ease-in-out group-hover:-translate-y-[200%]">
+              CONTACT US
+            </h1>
             <h1 className="absolute transform translate-y-[200%] transition-transform duration-500 ease-in-out group-hover:translate-y-0">
               CONTACT US
             </h1>

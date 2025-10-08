@@ -12,7 +12,7 @@ const Lastpara = ({ btnAnimation }) => {
       {/* Button / Text */}
       <Link 
         to={"/about"} 
-        className="lg:relative lg:mt-0 lg:scale-100 absolute mt-[37vh] scale-75" 
+        className="lg:relative lg:mt-0 lg:scale-100 absolute mt-[32vh] scale-75" 
         onMouseEnter={() => setIsActive(true)}  
         onMouseLeave={() => setIsActive(false)}
       >
@@ -20,7 +20,7 @@ const Lastpara = ({ btnAnimation }) => {
       </Link>
 
       {/* Image */}
-      <div className="lg:h-[62vh] lg:w-[48vw] lg:pb-0 pb-[5vh] rounded-2xl overflow-hidden">
+      <div className="lg:h-[62vh] lg:w-[48vw] lg:pb-0 pb-[5vh] lg:rounded-2xl rounded-4xl overflow-hidden">
         <motion.img
           ref={img}
           className="h-full w-full lg:mt-0 -mt-[4vh] object-cover"

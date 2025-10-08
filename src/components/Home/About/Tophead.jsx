@@ -39,9 +39,9 @@ const Tophead = () => {
 
   return (
     <div ref={containerRef} className="lg:px-[6vh] px-[2vh]">
-      <h1 className="lg:text-[3vw] text-[7vw] font-[font2] leading-[1.3] flex flex-wrap max-w-[80ch]">
+      <h1 className="lg:text-[3vw] text-[7vw] font-[font2] leading-[1.3] flex flex-wrap max-w-[80ch] lg:gap-[0vh] gap-[.2vh]">
         {renderText(
-          "We craft immersive websites, powerful brand identities, and digital experiences that capture attention, drive engagement, and fuel lasting growth."
+          "We  craft  immersive  websites,  powerful  brand  identities,  and  digital  experiences  that  capture  attention,  drive  engagement,  and  fuel  lasting  growth."
         )}
       </h1>
     </div>

@@ -27,7 +27,7 @@ const Company = () => {
       ease: "power2.out",
     });
     tl.to(divider.current, {
-      backgroundColor: "#F1F1F1",
+      backgroundColor: "#212121",
       duration: 1,
       ease: "power2.out",
     });

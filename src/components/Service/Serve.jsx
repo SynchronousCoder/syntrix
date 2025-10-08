@@ -129,7 +129,7 @@ const Serve = ({ btnAnimation }) => {
     >
       {/* Heading */}
       <div className="pt-[13vh] lg:px-[6vh] px-[2vh] overflow-hidden">
-        <h1 ref={heading} className="font-[font1] lg:text-[9.2vw] text-[14.5vw] uppercase">
+        <h1 ref={heading} className="font-[font1] lg:text-[9.2vw] text-[13vw] uppercase">
           Services That Scale
         </h1>
       </div>
