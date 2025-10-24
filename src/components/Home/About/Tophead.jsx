@@ -16,13 +16,12 @@ const Tophead = () => {
       {
         y: 0,
         opacity: 1,
-        stagger: 0.05, // thoda fast aur smooth
+        stagger: 0.02,
         duration: 0.8, // smoother transition
         ease: "power2.out", // soft easing
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
-          // scrub: true
         },
         // onComplete: () => onComplete?.()
       }

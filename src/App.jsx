@@ -7,8 +7,7 @@ import Aboutus from "./pages/About/Aboutus";
 import { Route, Routes, useLocation } from "react-router-dom";
 import LocomotiveScroll from "locomotive-scroll";
 import LoaderTransition from "./components/common/LoaderTransition";
-import { Analytics } from "@vercel/analytics/react";
-import SpeedInsights from "@vercel/speed-insights/react"; // <- add this
+import { Analytics } from "@vercel/analytics/react"; // ✅ Correct import
 
 // ScrollToTop: resets scroll on route change
 const ScrollToTop = () => {
@@ -20,25 +19,7 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  // instantiate locomotive scroll once
-  const locoRef = React.useRef<LocomotiveScroll | null>(null);
-
-  React.useEffect(() => {
-    // initialize once on mount
-    locoRef.current = new LocomotiveScroll({
-      el: document.querySelector("#root") || document.documentElement,
-      smooth: true,
-      // ...other options
-    });
-
-    return () => {
-      // cleanup on unmount
-      if (locoRef.current) {
-        locoRef.current.destroy();
-        locoRef.current = null;
-      }
-    };
-  }, []);
+  const locomotiveScroll = new LocomotiveScroll();
 
   const handleLoaderComplete = () => {
     console.log("Loader animation completed!");
@@ -55,11 +36,7 @@ const App = () => {
           <Route path="/about" element={<Aboutus />} />
           <Route path="/services" element={<Service />} />
         </Routes>
-
-        <Analytics /> {/* Vercel Analytics (separate) */}
-
-        {/* Speed Insights — only mount in production */}
-        {process.env.NODE_ENV === "production" && <SpeedInsights />}
+        <Analytics /> {/* ✅ Added here to track all routes */}
       </LoaderTransition>
     </>
   );

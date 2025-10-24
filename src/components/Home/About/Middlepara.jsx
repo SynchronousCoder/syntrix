@@ -13,7 +13,7 @@ const Middlepara = ({ btnAnimation }) => {
       opacity: 0,
       delay: 1,
       duration: 1,
-      stagger: .2,
+      stagger: .1,
       scrollTrigger:{
         trigger: container.current,
         end: "top 80%",
