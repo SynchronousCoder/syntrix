@@ -13,7 +13,6 @@ const Sendmail = () => {
     { value: "25k-50k", label: "$25,000 - 50,000" },
   ];
 
-  // ✅ STEP 1 — Form Data State
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -27,25 +26,60 @@ const Sendmail = () => {
 
   const handleBudgetSelect = (option) => {
     setSelectedBudget(option.label);
-    setFormData({ ...formData, budget: option.label }); // ✅ update budget in formData
+    setFormData({ ...formData, budget: option.label });
     setIsSelectOpen(false);
   };
 
+  // ✅ FINAL FIXED SUBMIT HANDLER
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 🔴 Required fields
+    if (!formData.name || !formData.goal || !formData.budget) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    // 🔴 Email validation
+    if (
+      !formData.email ||
+      !formData.email.includes("@") ||
+      !formData.email.includes(".")
+    ) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    // 🔴 Privacy
+    if (!formData.privacy) {
+      alert("Please accept the Privacy Policy");
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:3000/data", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = { message: "Server error" };
+      }
+
+      if (!res.ok) {
+        throw new Error(data.message || "Submission failed");
+      }
+
       alert(data.message);
-      console.log("Response:", data);
+      console.log("SUCCESS:", data);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("SUBMIT ERROR:", error);
       alert("Failed to submit form!");
     }
   };
@@ -118,17 +152,14 @@ const Sendmail = () => {
           {/* Date */}
           <div className="flex flex-wrap items-center gap-3 mb-[3vh]">
             <span>With an idea of having that completed</span>
-            <div className="relative lg:min-w-[16vw] min-w-[100%]">
-              <input
-                type="date"
-                value={formData.date}
-                onChange={(e) => {
-                  setSelectedDate(e.target.value);
-                  setFormData({ ...formData, date: e.target.value });
-                }}
-                className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[40vw] min-w-[100%] text-gray-600 font-light cursor-pointer"
-              />
-            </div>
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
+              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[40vw] min-w-[100%] text-gray-600 font-light cursor-pointer"
+            />
           </div>
 
           {/* Budget */}
