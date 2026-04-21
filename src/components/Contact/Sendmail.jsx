@@ -57,7 +57,7 @@ const Sendmail = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/data", {
+      const res = await fetch("https://syntrix-backend-production.up.railway.app/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

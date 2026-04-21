@@ -7,27 +7,27 @@ gsap.registerPlugin(ScrollTrigger);
 const Card = ({ title, line, idx }) => {
   const card = useRef(null);
 
-  useGSAP(() => {
-    const direction = idx % 2 === 0 ? -1000 : 1000; // even: right, odd: left
-    const rowDelay = idx < 2 ? 0 : 0.5; // first row: no delay, second row: delayed
+    useGSAP(() => {
+      const direction = idx % 2 === 0 ? -1000 : 1000; // even: right, odd: left
+      const rowDelay = idx < 2 ? 0 : 0.5; // first row: no delay, second row: delayed
 
-    gsap.from(card.current, {
-      x: direction,
-      opacity: 0,
-      duration: 1,
-      delay: rowDelay,
-      ease: "power3.out",
-      transformPerspective: 800, // 👈 depth ka feel
-      rotationY: direction > 0 ? 15 : -15, // 👈 thoda sa twist based on direction
-      scrollTrigger: {
-        trigger: card.current,
-        start: "top 70%",
-        end: "top 45%",
-        scrub: 2,
-        // markers: true,
-      },
-    });
-  }, [idx]);
+      gsap.from(card.current, {
+        x: direction,
+        opacity: 0,
+        duration: 1,
+        delay: rowDelay,
+        ease: "power3.out",
+        transformPerspective: 800, // 👈 depth ka feel
+        rotationY: direction > 0 ? 15 : -15, // 👈 thoda sa twist based on direction
+        scrollTrigger: {
+          trigger: card.current,
+          start: "top 70%",
+          end: "top 45%",
+          scrub: 2,
+          // markers: true,
+        },
+      });
+    }, [idx]);
 
   return (
     <div
