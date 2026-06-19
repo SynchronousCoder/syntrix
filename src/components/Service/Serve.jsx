@@ -44,7 +44,7 @@ const Serve = ({ btnAnimation }) => {
         // markers: true,
         start: "top 40%",
         end: "top 30%",
-        scrub: 1,
+        // scrub: 1,
       },
     });
   });
@@ -56,14 +56,14 @@ const Serve = ({ btnAnimation }) => {
       y: 100,
       opacity: 0,
       duration: 1,
-      scrub: true,
+      // scrub: true,
       delay: 2.5,
     });
     tl.from(sub.current, {
       y: 100,
       opacity: 0,
       duration: 1,
-      scrub: true,
+      // scrub: true,
     });
   });
 
@@ -74,7 +74,7 @@ const Serve = ({ btnAnimation }) => {
         trigger: changeColor.current,
         start: "top 55%", // when element enters viewport
         end: "top 40%", // when element scrolls past top
-        // markers: true, // for debugging
+        markers: true, // for debugging
       },
     });
 
@@ -101,7 +101,7 @@ const Serve = ({ btnAnimation }) => {
         trigger: subtext.current,
         start: "-100% 55%", // when element enters viewport
         end: "-100% 40%", // when element scrolls past top
-        scrub: true, // smooth scroll-linked animation
+        // scrub: true, // smooth scroll-linked animation
         // markers: true, // for debugging
       },
     });

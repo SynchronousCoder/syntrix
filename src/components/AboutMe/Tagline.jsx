@@ -32,7 +32,7 @@ const WaveWord = ({ text }) => {
           variants={letterVariants}
           initial="initial"
           animate="animate"
-          className=" inline-block lg:text-[5.9vw] text-[17vw] font-extrabold bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+          className=" inline-block lg:text-[5.9vw] text-[17vw] font-extrabold bg-[url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')] bg-cover bg-center
         bg-clip-text text-transparent text-shadow-[0_0_20px_rgba(255,255,255,0.5)] "
         >
           {char}

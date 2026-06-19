@@ -23,47 +23,96 @@ const Card = ({ title, line, idx }) => {
           trigger: card.current,
           start: "top 70%",
           end: "top 45%",
-          scrub: 2,
+            // scrub: 2,
           // markers: true,
         },
       });
     }, [idx]);
 
-  return (
-    <div
-      ref={card}
-      className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%] overflow-hidden rounded-[6rem]"
-    >
-      {/* Glow Border Layer */}
-      <div
-        className="absolute inset-0 border-[.7vh] border-transparent blommBorder"
-        style={{
-          borderImage:
-            "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
-        }}
-      ></div>
+  // return (
+  //   <div
+  //     ref={card}
+  //     className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%] overflow-hidden rounded-[0rem]"
+  //   >
+  //     {/* Glow Border Layer */}
+  //     <div
+  //       className="absolute inset-0 border-[.7vh] border-transparent blommBorder"
+  //       style={{
+  //         borderImage:
+  //           "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') 30 round",
+  //       }}
+  //     ></div>
 
-      {/* Main Border Layer */}
+  //     {/* Main Border Layer */}
+  //     <div
+  //       className="absolute inset-0 border-[.7vh] border-transparent flex flex-col justify-start items-center px-[2vh] py-[4vh]"
+  //       style={{
+  //         borderImage:
+  //           "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') 30 round",
+  //         borderRadius: "10vh",
+  //       }}
+  //     >
+  //       <div
+  //         className="bg-[url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')] bg-cover bg-center
+  //         bg-clip-text text-transparent text-center"
+  //       >
+  //         <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
+  //           {title}
+  //         </h1>
+  //         <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+return (
+  <div
+    ref={card}
+    className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%]"
+    style={{ borderRadius: "6rem" }}
+  >
+    {/* SVG Border - perfectly follows any border-radius */}
+    <svg
+      className="absolute inset-0 w-full h-full"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <pattern id={`bloom-${idx}`} patternUnits="userSpaceOnUse" width="100%" height="100%">
+          <image
+            href="https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png"
+            x="0" y="0" width="100%" height="100%"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </pattern>
+      </defs>
+      <rect
+        x="2" y="2"
+        width="calc(100% - 4px)" height="calc(100% - 4px)"
+        rx="90" ry="90"
+        fill="none"
+        stroke={`url(#bloom-${idx})`}
+        strokeWidth="3"
+      />
+    </svg>
+
+    {/* Content */}
+    <div
+      className="relative w-full h-full flex flex-col justify-start items-center px-[2vh] py-[4vh]"
+    >
       <div
-        className="absolute inset-0 border-[.7vh] border-transparent flex flex-col justify-start items-center px-[2vh] py-[4vh]"
+        className="bg-cover bg-center bg-clip-text text-transparent text-center"
         style={{
-          borderImage:
-            "url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png') 30 round",
-          borderRadius: "10vh",
+          backgroundImage: "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')",
         }}
       >
-        <div
-          className="bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
-          bg-clip-text text-transparent text-center"
-        >
-          <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
-            {title}
-          </h1>
-          <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>
-        </div>
+        <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
+          {title}
+        </h1>
+        <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Card;

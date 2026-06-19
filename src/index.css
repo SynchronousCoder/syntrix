@@ -94,3 +94,15 @@ body{
   filter: blur(10px) saturate(1);
    mix-blend-mode: screen;  
 }
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') center/cover;
+  filter: blur(12px) saturate(2);
+  opacity: 0.6;
+  z-index: -1;
+  mix-blend-mode: screen;
+}
