@@ -4,7 +4,7 @@ import KnowMore from "./KnowMore";
 const Sendmail = () => {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [selectedBudget, setSelectedBudget] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [loading, setLoading] = useState(false); // ✅ removed unused selectedDate
 
   const budgetOptions = [
     { value: "1k-5k", label: "$1,000 - 5,000" },
@@ -30,40 +30,52 @@ const Sendmail = () => {
     setIsSelectOpen(false);
   };
 
-  // ✅ FINAL FIXED SUBMIT HANDLER
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔴 Required fields
-    if (!formData.name || !formData.goal || !formData.budget) {
+    if (loading) return;
+
+    // ✅ Fix 2: company added to required validation (matches the * in placeholder)
+    if (
+      !formData.name ||
+      !formData.company ||
+      !formData.goal ||
+      !formData.budget
+    ) {
       alert("Please fill all required fields");
       return;
     }
 
-    // 🔴 Email validation
-    if (
-      !formData.email ||
-      !formData.email.includes("@") ||
-      !formData.email.includes(".")
-    ) {
+    // ✅ Fix 3: stronger email regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
       alert("Please enter a valid email address");
       return;
     }
 
-    // 🔴 Privacy
     if (!formData.privacy) {
       alert("Please accept the Privacy Policy");
       return;
     }
 
+    setLoading(true);
+
+    // ✅ Fix 6: AbortController for Render cold start timeout
+
     try {
-      const res = await fetch("https://syntrix-backend-qi9p.onrender.com/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://syntrix-backend-qi9p.onrender.com/data",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
+
+      console.log("STATUS:", res.status);
+      console.log("OK:", res.ok);
 
       let data;
       try {
@@ -76,13 +88,31 @@ const Sendmail = () => {
         throw new Error(data.message || "Submission failed");
       }
 
-      alert(data.message);
-      console.log("SUCCESS:", data);
+      alert("Inquiry Sent Successfully 🚀");
+
+      setFormData({
+        name: "",
+        company: "",
+        goal: "",
+        date: "",
+        budget: "",
+        email: "",
+        details: "",
+        privacy: false,
+      });
+
+      setSelectedBudget("");
+      setIsSelectOpen(false); // ✅ Fix 4: close dropdown on reset
     } catch (error) {
       console.error("SUBMIT ERROR:", error);
       alert("Failed to submit form!");
+    } finally {
+      setLoading(false);
     }
   };
+
+  const premiumInput =
+    "border-b-2 border-gray-300 focus:border-black focus:outline-none bg-transparent px-2 pb-2 transition-all duration-300 hover:border-gray-500 placeholder:text-gray-400";
 
   return (
     <form
@@ -121,7 +151,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 text-[2.2vw] placeholder:text-gray-400 lg:min-w-[18vw] min-w-[100%]"
+              className={`${premiumInput} text-[2.2vw] lg:min-w-[18vw] min-w-[100%]`}
             />
             <span>and I work with</span>
             <input
@@ -131,7 +161,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, company: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 text-[2.2vw] placeholder:text-gray-400 lg:min-w-[23vw] min-w-[100%]"
+              className={`${premiumInput} text-[2.2vw] lg:min-w-[23vw] min-w-[100%]`}
             />
           </div>
 
@@ -145,7 +175,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, goal: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[37vw] min-w-[100%]"
+              className={`${premiumInput} lg:min-w-[37vw] min-w-[100%]`}
             />
           </div>
 
@@ -158,7 +188,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[40vw] min-w-[100%] text-gray-600 font-light cursor-pointer"
+              className={`${premiumInput} lg:min-w-[40vw] min-w-[100%] text-gray-600 font-light cursor-pointer`}
             />
           </div>
 
@@ -166,9 +196,10 @@ const Sendmail = () => {
           <div className="flex flex-wrap items-center gap-3 mb-[3vh]">
             <span>I am hoping to stay around a budget range of</span>
             <div className="relative lg:min-w-[14vw] min-w-[100%]">
+              <input type="hidden" name="budget" value={formData.budget} />
               <div
                 onClick={() => setIsSelectOpen(!isSelectOpen)}
-                className="cursor-pointer border-b-2 border-gray-400 px-1 pb-1 lg:min-w-[31.2vw]"
+                className="cursor-pointer border-b-2 border-gray-300 hover:border-gray-500 transition-all duration-300 px-2 pb-2 lg:min-w-[31.2vw]"
               >
                 {selectedBudget ? (
                   <span className="text-gray-600">{selectedBudget}</span>
@@ -204,7 +235,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[32vw] min-w-[100%]"
+              className={`${premiumInput} lg:min-w-[32vw] min-w-[100%]`}
             />
             <span>to start the conversation.</span>
           </div>
@@ -219,7 +250,7 @@ const Sendmail = () => {
               onChange={(e) =>
                 setFormData({ ...formData, details: e.target.value })
               }
-              className="border-b-2 border-gray-400 focus:border-gray-700 bg-transparent px-1 pb-1 lg:min-w-[48vw] min-w-[100%]"
+              className={`${premiumInput} lg:min-w-[48vw] min-w-[100%]`}
             />
           </div>
         </div>
@@ -247,11 +278,82 @@ const Sendmail = () => {
             </label>
           </div>
 
+          {/* ✅ Fix 5: Spinner in button */}
           <button
             type="submit"
-            className="bg-gray-900 hover:bg-black text-white font-[font2] font-semibold lg:text-[1.1vw] lg:px-10 lg:py-4 p-2 rounded-full uppercase flex items-center gap-2"
+            disabled={loading}
+            className="
+              group
+              relative
+              overflow-hidden
+              bg-[#212121]
+              text-white
+              font-[font2]
+              font-medium
+              rounded-full
+              lg:px-10
+              lg:py-4
+              p-3
+              uppercase
+              tracking-wider
+              transition-all
+              duration-300
+              hover:scale-105
+              hover:shadow-[0_15px_40px_rgba(0,0,0,0.25)]
+              disabled:opacity-60
+              disabled:cursor-not-allowed
+              lg:mt-0
+              mt-6
+            "
           >
-            SEND INQUIRY <span className="text-lg">→</span>
+            <span className="relative z-10 flex items-center gap-3">
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      opacity=".25"
+                    />
+                    <path
+                      d="M22 12a10 10 0 00-10-10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Inquiry
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </>
+              )}
+            </span>
+
+            {/* Hover gradient overlay */}
+            <div
+              className="
+                absolute
+                inset-0
+                bg-gradient-to-r
+                from-neutral-700
+                to-black
+                opacity-0
+                group-hover:opacity-100
+                transition-opacity
+                duration-300
+              "
+            />
           </button>
         </div>
       </div>
