@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
-body{
-  background-color: #F1F1F1;
+html {
+  scroll-behavior: auto !important; /* Lenis khud handle karega */
+}
+body {
+  background-color: #f1f1f1;
+  overflow-x: hidden;
 }
 
 @font-face {
@@ -39,9 +43,7 @@ body{
   }
 }
 
-
-
-.hero2{
+.hero2 {
   filter: blur(30px);
   animation-name: anime1;
   animation-timing-function: linear;
@@ -50,7 +52,7 @@ body{
   animation-iteration-count: infinite;
 }
 
-.hero1{
+.hero1 {
   filter: blur(30px);
   animation-name: anime2;
   animation-timing-function: linear;
@@ -59,22 +61,21 @@ body{
   animation-iteration-count: infinite;
 }
 @keyframes anime1 {
-  from{
+  from {
     transform: translate(0%, 0%);
     scale: 100%;
   }
-    to{
+  to {
     transform: translate(-20%, 20%);
     scale: 150%;
   }
 }
 @keyframes anime2 {
-  from{
+  from {
     transform: translate(0%, 0%);
-        scale: 100%;
-
+    scale: 100%;
   }
-    to{
+  to {
     transform: translate(10%, -10%);
     scale: 160%;
   }
@@ -86,21 +87,22 @@ body{
   -webkit-text-stroke: 3px black; /* outline thickness aur color */
 }
 
-.bloom{
+.bloom {
   filter: blur(60px) saturate(1);
-   mix-blend-mode: screen;
+  mix-blend-mode: screen;
 }
-.blommBorder{
+.blommBorder {
   filter: blur(10px) saturate(1);
-   mix-blend-mode: screen;  
+  mix-blend-mode: screen;
 }
 
 .card-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') center/cover;
+  background: url("https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png")
+    center/cover;
   filter: blur(12px) saturate(2);
   opacity: 0.6;
   z-index: -1;
