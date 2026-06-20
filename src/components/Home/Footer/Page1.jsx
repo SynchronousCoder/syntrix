@@ -30,10 +30,10 @@ const Page1 = ({ btnAnimation }) => {
             <h1>TO START </h1>
             <h1>THE PROJECT ?</h1>
           </div>
-          <div data-scroll data-scroll-speed="1"  className="lg:absolute flex lg:gap-6 gap-4 justify-center items-center lg:scale-[80%] scale-[65%] lg:pb-0 pb-[20vw]">
+          {/* <div data-scroll data-scroll-speed="1"  className="lg:absolute flex lg:gap-6 gap-4 justify-center items-center lg:scale-[80%] scale-[65%] lg:pb-0 pb-[20vw]">
             <Eye rotate={rotate} />
             <Eye rotate={rotate} />
-          </div>
+          </div> */}
         </div>
         <Link to={"/contact"} className="flex justify-center">
           {btnAnimation({ char: "Start the project", key: 2 })}

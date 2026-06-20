@@ -4,115 +4,103 @@ import React, { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BLOOM_URL = "https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png";
+
 const Card = ({ title, line, idx }) => {
   const card = useRef(null);
 
-    useGSAP(() => {
-      const direction = idx % 2 === 0 ? -1000 : 1000; // even: right, odd: left
-      const rowDelay = idx < 2 ? 0 : 0.5; // first row: no delay, second row: delayed
+  useGSAP(() => {
+    const direction = idx % 2 === 0 ? -150 : 150;
 
-      gsap.from(card.current, {
+    gsap.fromTo(
+      card.current,
+      {
         x: direction,
         opacity: 0,
-        duration: 1,
-        delay: rowDelay,
+        rotationY: direction > 0 ? 10 : -10,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        rotationY: 0,
         ease: "power3.out",
-        transformPerspective: 800, // 👈 depth ka feel
-        rotationY: direction > 0 ? 15 : -15, // 👈 thoda sa twist based on direction
         scrollTrigger: {
           trigger: card.current,
-          start: "top 70%",
-          end: "top 45%",
-            // scrub: 2,
-          // markers: true,
+          start: "top 85%",
+          end: "top 50%",
+          scrub: true,
         },
-      });
-    }, [idx]);
+      }
+    );
+  }, [idx]);
 
-  // return (
-  //   <div
-  //     ref={card}
-  //     className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%] overflow-hidden rounded-[0rem]"
-  //   >
-  //     {/* Glow Border Layer */}
-  //     <div
-  //       className="absolute inset-0 border-[.7vh] border-transparent blommBorder"
-  //       style={{
-  //         borderImage:
-  //           "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') 30 round",
-  //       }}
-  //     ></div>
-
-  //     {/* Main Border Layer */}
-  //     <div
-  //       className="absolute inset-0 border-[.7vh] border-transparent flex flex-col justify-start items-center px-[2vh] py-[4vh]"
-  //       style={{
-  //         borderImage:
-  //           "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png') 30 round",
-  //         borderRadius: "10vh",
-  //       }}
-  //     >
-  //       <div
-  //         className="bg-[url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')] bg-cover bg-center
-  //         bg-clip-text text-transparent text-center"
-  //       >
-  //         <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
-  //           {title}
-  //         </h1>
-  //         <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-return (
-  <div
-    ref={card}
-    className="relative lg:min-h-[40vh] lg:w-[32vw] min-h-[35vh] w-[92%]"
-    style={{ borderRadius: "6rem" }}
-  >
-    {/* SVG Border - perfectly follows any border-radius */}
-    <svg
-      className="absolute inset-0 w-full h-full"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <pattern id={`bloom-${idx}`} patternUnits="userSpaceOnUse" width="100%" height="100%">
-          <image
-            href="https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png"
-            x="0" y="0" width="100%" height="100%"
-            preserveAspectRatio="xMidYMid slice"
-          />
-        </pattern>
-      </defs>
-      <rect
-        x="2" y="2"
-        width="calc(100% - 4px)" height="calc(100% - 4px)"
-        rx="90" ry="90"
-        fill="none"
-        stroke={`url(#bloom-${idx})`}
-        strokeWidth="3"
-      />
-    </svg>
-
-    {/* Content */}
+  return (
     <div
-      className="relative w-full h-full flex flex-col justify-start items-center px-[2vh] py-[4vh]"
+      ref={card}
+      className="relative w-full group cursor-default rounded-[2.5rem] 
+                 border-2 border-transparent 
+                 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
     >
-      <div
-        className="bg-cover bg-center bg-clip-text text-transparent text-center"
-        style={{
-          backgroundImage: "url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')",
-        }}
+      {/* SVG Bloom Border */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
       >
-        <h1 className="font-[font1] lg:text-[6vw] text-[14vw] lg:mb-[2vw] mb-[5vw] mt-[1vw] uppercase lg:leading-[5.5vw] leading-[9.5vw]">
+        <defs>
+          <pattern id={`bloom-${idx}`} patternUnits="userSpaceOnUse" width="600" height="400">
+            <image
+              href={BLOOM_URL}
+              x="0"
+              y="0"
+              width="600"
+              height="400"
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </pattern>
+        </defs>
+        <rect
+          x="1.5"
+          y="1.5"
+          width="99%"
+          height="99%"
+          rx="38"
+          ry="38"
+          fill="none"
+          stroke={`url(#bloom-${idx})`}
+          strokeWidth="2.5"
+        />
+      </svg>
+
+      {/* Card Content */}
+      <div className="relative flex flex-col justify-between gap-4 px-8 py-8 sm:px-10 sm:py-10">
+        <span className="self-end text-xs font-[font2] tracking-widest uppercase opacity-30 text-white">
+          0{idx + 1}
+        </span>
+
+        <h1
+          className="font-[font1] uppercase leading-none text-center"
+          style={{
+            fontSize: "clamp(2rem, 5vw, 5.5rem)",
+            backgroundImage: `url('${BLOOM_URL}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
           {title}
         </h1>
-        <h3 className="text-center font-[font2] lg:font-semibold font-normal">{line}</h3>
+
+        <div className="w-16 h-[1px] bg-white/20 mx-auto" />
+
+        <p className="font-[font2] text-center text-white/60 text-sm sm:text-base lg:text-[1.05vw] leading-relaxed">
+          {line}
+        </p>
       </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default Card;

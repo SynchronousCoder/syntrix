@@ -123,10 +123,10 @@ const Tagline = () => {
       </div>
 
       {/* ===== Empty div for Eyes Animation ===== */}
-      <div className="w-full lg:h-[40vh] flex items-center justify-center lg:gap-5 mb-[15vh]">
+      {/* <div className="w-full lg:h-[40vh] flex items-center justify-center lg:gap-5 mb-[15vh]">
         <Eye rotate={rotate} />
         <Eye rotate={rotate} />
-      </div>
+      </div> */}
 
       {/* ===== Our Philosophy (heading) ===== */}
       <div className="lg:px-[6vh] px-[2vh] max-w-[85ch] lg:text-[2.6vh] text-[6vw] leading-[7vw] lg:leading-[3.8vw] tracking-wide text-white">

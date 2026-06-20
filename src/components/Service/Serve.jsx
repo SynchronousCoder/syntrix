@@ -14,24 +14,24 @@ const Serve = ({ btnAnimation }) => {
   const sub = useRef(null);
   const subtext = useRef(null);
 
-  const content = [
-    {
-      title: "Web Design",
-      line: "Pixel-perfect layouts that balance creativity and clarity. We craft designs that not only look stunning but also drive results",
-    },
-    {
-      title: "UI/UX Strategy",
-      line: "Human-first interfaces with smooth journeys. From wireframes to prototypes, every click feels effortless",
-    },
-    {
-      title: "Web Dev",
-      line: "Fast, responsive, and scalable websites powered by clean code. Built to perform across every screen and platform",
-    },
-    {
-      title: "Digital Storytelling",
-      line: "Immersive motion and interactive design that breathe life into your brand and keep users engaged",
-    },
-  ];
+const services = [
+  {
+    title: "Web Design",
+    line: "Pixel-perfect layouts that balance creativity and clarity. We craft designs that not only look stunning but also drive results",
+  },
+  {
+    title: "UI/UX Strategy",
+    line: "Human-first interfaces with smooth journeys. From wireframes to prototypes, every click feels effortless",
+  },
+  {
+    title: "Web Dev",
+    line: "Fast, responsive, and scalable websites powered by clean code. Built to perform across every screen and platform",
+  },
+  {
+    title: "Digital Storytelling",
+    line: "Immersive motion and interactive design that breathe life into your brand and keep users engaged",
+  },
+];
 
   //Changing color of the page
   useGSAP(function () {
@@ -44,7 +44,7 @@ const Serve = ({ btnAnimation }) => {
         // markers: true,
         start: "top 40%",
         end: "top 30%",
-        // scrub: 1,
+        scrub: 1,
       },
     });
   });
@@ -74,7 +74,7 @@ const Serve = ({ btnAnimation }) => {
         trigger: changeColor.current,
         start: "top 55%", // when element enters viewport
         end: "top 40%", // when element scrolls past top
-        markers: true, // for debugging
+        // markers: true, // for debugging
       },
     });
 
@@ -125,7 +125,7 @@ const Serve = ({ btnAnimation }) => {
   return (
     <div
       ref={mainPage}
-      className="min-h-[260vh] w-full bg-[#F1F1F1] text-[#212121] overflow-x-hidden"
+      className="min-h-[200vh] w-full bg-[#F1F1F1] text-[#212121] overflow-x-hidden"
     >
       {/* Heading */}
       <div className="pt-[13vh] lg:px-[6vh] px-[2vh] overflow-hidden">
@@ -151,16 +151,16 @@ const Serve = ({ btnAnimation }) => {
       {/* Scroll Trigger Text */}
       <div
         ref={changeColor}
-        className=" w-full h-[40vh] flex justify-center items-center"
+        className=" w-full h-[40vh] flex justify-center items-center mb-10"
       >
         <h1
-          className="z-[2]  absolute lg:text-[8.4vw] text-[10.5vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+          className="z-[2]  absolute lg:text-[8.4vw] text-[10.5vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')] bg-cover bg-center
         bg-clip-text text-transparent"
         >
           GET OUTSHINED
         </h1>
         <h1
-          className="bloom absolute lg:text-[8.4vw] text-[10.5vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-cover bg-center
+          className="bloom absolute lg:text-[8.4vw] text-[10.5vw] text-center font-extrabold bg-[url('https://ik.imagekit.io/m9zi40oov/bloom_texture_cleanup.png')] bg-cover bg-center
         bg-clip-text text-transparent"
         >
           GET OUTSHINED
@@ -178,13 +178,13 @@ const Serve = ({ btnAnimation }) => {
       </div>
 
       {/* Cards Section */}
-      <div className="Midserve relative w-full h-[120vh] flex items-center justify-center">
-        <div className="flex lg:flex-row flex-col flex-wrap justify-center items-center gap-[10vw] w-[80%] [transform-style:preserve-3d] [perspective:1000px]">
-          {content.map((item, index) => (
-            <Card key={index} title={item.title} line={item.line} idx={index} />
-          ))}
-        </div>
+    <section className="w-full px-4 sm:px-8 lg:px-[6vh] py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6 max-w-[90vw] mx-auto">
+        {services.map((s, i) => (
+          <Card key={i} title={s.title} line={s.line} idx={i} />
+        ))}
       </div>
+    </section>
 
     </div>
   );
