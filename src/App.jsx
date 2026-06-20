@@ -8,6 +8,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import LocomotiveScroll from "locomotive-scroll";
 import LoaderTransition from "./components/common/LoaderTransition";
 import { Analytics } from "@vercel/analytics/react"; // ✅ Correct import
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // ScrollToTop: resets scroll on route change
 const ScrollToTop = () => {
@@ -37,9 +38,10 @@ const App = () => {
           <Route path="/services" element={<Service />} />
         </Routes>
         <Analytics /> {/* ✅ Added here to track all routes */}
+        <SpeedInsights /> {/* 👈 bas yahi add karna hai, sabse last mein */}
       </LoaderTransition>
     </>
   );
 };
 
-export default App;
+export default App;
