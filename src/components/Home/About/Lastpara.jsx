@@ -72,7 +72,7 @@ const Lastpara = ({ btnAnimation }) => {
           <motion.img
             ref={imgRef}
             className="h-full w-full object-cover"
-            src="/img/aboutus.png"
+            src="https://ik.imagekit.io/m9zi40oov/aboutus.png?updatedAt=1782029051521"
             alt="About Syntrix"
             animate={{ scale: isHovered ? 1.06 : 1 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}

@@ -76,7 +76,7 @@ const Eyes = () => {
         ref={bgRef}
         className="absolute inset-[-2%] bg-cover bg-center will-change-transform"
         style={{
-          backgroundImage: "url(/img/bannerOP.png)",
+          backgroundImage: "url(https://ik.imagekit.io/m9zi40oov/cardbg.png?updatedAt=1782029051523)",
           transform: "scale(1.04)",
         }}
       />

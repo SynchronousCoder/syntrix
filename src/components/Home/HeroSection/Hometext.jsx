@@ -10,10 +10,14 @@ const Hometext = () => {
         </div>
         <div className="lg:h-[12vh] lg:w-[50vw]  flex items-center">
           <motion.div
-            animate={{ width: "12vw", marginRight: "1.5vw" }}
+            // animate={{ width: "12vw", marginRight: "1.5vw" }}
+            animate={{
+              width: window.innerWidth >= 1024 ? "12vw" : "20vw",
+              marginRight: window.innerWidth >= 1024 ? "1.5vw" : "1.75vw",
+            }}
             initial={{ width: "0vw", marginRight: "0vw" }}
             transition={{ ease: [0.76, 0, 0.24, 1], duration: 1, delay: 0.25 }}
-            className="lg:h-[11vh] lg:w-[12vw] h-[11vw] w-[14vw] object-cover lg:rounded-2xl rounded-[1vh] overflow-hidden lg:-top-[1.5vw]"
+            className="lg:h-[11vh] lg:w-[12vw] h-[11vw] object-cover lg:rounded-2xl rounded-[1vh] overflow-hidden lg:-top-[1.5vw]"
           >
             <img
               src="/img/imgSyntrix.png"

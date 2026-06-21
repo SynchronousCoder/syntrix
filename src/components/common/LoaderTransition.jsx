@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Eye from "../../components/Home/Eyes/Eye";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -18,7 +18,8 @@ const LoaderTransition = ({ children, onComplete }) => {
   const pageRef = useRef(null);
 
   // States
-const { pathname } = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [hasLoaderRun, setHasLoaderRun] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -27,10 +28,10 @@ const { pathname } = useLocation();
 
   // Check if loader has run before (using sessionStorage to persist during session)
   useEffect(() => {
-    const loaderCompleted = sessionStorage.getItem('loaderCompleted');
+    const loaderCompleted = sessionStorage.getItem("loaderCompleted");
     if (loaderCompleted) {
       setHasLoaderRun(true);
-      setIsFirstLoad(false); // Not first load if loader already completed
+      setIsFirstLoad(false);
     }
   }, []);
 
@@ -51,8 +52,20 @@ const { pathname } = useLocation();
   }, [hasLoaderRun]);
 
   // Eye rotation for transitions
+  // Noise grain parallax on mouse move
+  // Noise grain parallax + eye tracking on mouse move
   useEffect(() => {
     const handleMouseMove = (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      gsap.to(".noise-layer", {
+        x: (x - 0.5) * 30,
+        y: (y - 0.5) * 30,
+        duration: 1.2,
+        ease: "power2.out",
+      });
+
       const deltaX = e.clientX - window.innerWidth / 2;
       const deltaY = e.clientY - window.innerHeight / 2;
       const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -63,16 +76,12 @@ const { pathname } = useLocation();
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Main animation logic
+  // Main animation logic — only handles the initial loader
   useGSAP(() => {
     if (!hasLoaderRun) {
-      // First time visit - run loader animation
       runLoaderAnimation();
-    } else if (!isFirstLoad && pathname !== initialPathname) {
-      // Only run transition if pathname actually changed from initial
-      runTransitionAnimation();
     }
-  }, [pathname, hasLoaderRun, isFirstLoad]);
+  }, [hasLoaderRun]);
 
   const runLoaderAnimation = () => {
     const tl = gsap.timeline();
@@ -85,83 +94,148 @@ const { pathname } = useLocation();
       x: -2000,
       duration: 0.7,
     });
-    tl.from(left.current, {
-      x: 1500,
-      duration: 0.7,
-    }, "-=.7");
+    tl.from(
+      left.current,
+      {
+        x: 1500,
+        duration: 0.7,
+      },
+      "-=.7",
+    );
     tl.to(loader.current, {
       scale: 1,
       delay: 3.5,
       borderRadius: "0px",
     });
-    tl.to(percent.current, {
-      opacity: 0,
-    }, "-=.2");
+    tl.to(
+      percent.current,
+      {
+        opacity: 0,
+      },
+      "-=.2",
+    );
     tl.to(right.current, {
       opacity: 0,
     });
-    tl.to(left.current, {
-      opacity: 0,
-    }, "-=.7");
-    
+    tl.to(
+      left.current,
+      {
+        opacity: 0,
+      },
+      "-=.7",
+    );
+
     tl.to(mainLoader.current, {
       opacity: 0,
       duration: 0.3,
       onComplete: () => {
-        // Mark loader as completed
         setHasLoaderRun(true);
-        sessionStorage.setItem('loaderCompleted', 'true');
-        
-        // Hide loader completely
+        sessionStorage.setItem("loaderCompleted", "true");
         gsap.set(mainLoader.current, { display: "none" });
-        
-        // After loader completes, mark first load as done
         setTimeout(() => {
           setIsFirstLoad(false);
         }, 100);
-        
-        // Callback to parent if needed
         if (onComplete) {
           onComplete();
         }
-      }
+      },
     });
   };
 
-  const runTransitionAnimation = () => {
-    const tl = gsap.timeline({
-      defaults: { ease: "power2.inOut" },
-    });
+  // Listens for nav clicks from Nav.jsx — covers the screen with a cinematic
+  // depth transition, navigates only once fully covered, then reveals the
+  // new page rising forward from depth.
+  useEffect(() => {
+    const handler = (e) => {
+      const targetPath = e.detail.path;
 
-    // Show transition overlay
-    tl.set(transitionRef.current, { display: "block" });
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.inOut" },
+      });
 
-    // Slide in overlay
-    tl.fromTo(
-      transitionRef.current,
-      { y: "100%" },
-      { y: "0%", duration: 1.2 }
-    );
+      gsap.set(transitionRef.current, {
+        display: "block",
+        y: "100%",
+      });
 
-    // Slide out overlay
-    tl.to(transitionRef.current, { y: "-100%", duration: 1, delay: 0.7 });
+      // Outgoing page: shrink back, tilt away, darken/blur — as the curtain rises
+      tl.to(
+        pageRef.current,
+        {
+          scale: 0.92,
+          rotateX: 8,
+          y: -40,
+          filter: "blur(8px)",
+          opacity: 0.6,
+          duration: 0.9,
+        },
+        0,
+      );
 
-    // Hide transition overlay
-    tl.set(transitionRef.current, { display: "none" });
+      // Curtain rises to fully cover the screen
+      tl.to(
+        transitionRef.current,
+        {
+          y: "0%",
+          duration: 0.9,
+          onComplete: () => {
+            navigate(targetPath);
 
-    // Fade/scale page content
-    tl.from(
-      pageRef.current,
-      { opacity: 0, scale: 1.05, duration: 1.2 },
-      "-=0.5"
-    );
-  };
+            // New page starts pre-positioned deeper in 3D space,
+            // tilted the opposite way, ready to rise forward
+            gsap.set(pageRef.current, {
+              scale: 0.92,
+              rotateX: -8,
+              y: 80,
+              opacity: 0.6,
+              filter: "blur(8px)",
+            });
+          },
+        },
+        0,
+      );
+
+      // Curtain exits upward, revealing the new page
+      tl.to(transitionRef.current, {
+        y: "-100%",
+        duration: 1.5,
+        delay: 0.8,
+      });
+
+      // New page rises forward into its natural resting state
+      tl.to(
+        pageRef.current,
+        {
+          scale: 1,
+          rotateX: 0,
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 1.7,
+          ease: "power4.out",
+        },
+        ">",
+      );
+
+      tl.set(transitionRef.current, {
+        display: "none",
+      });
+    };
+
+    window.addEventListener("syntrix-transition-start", handler);
+
+    return () =>
+      window.removeEventListener("syntrix-transition-start", handler);
+  }, [navigate]);
 
   return (
     <>
       {/* Loader - only shows on first visit */}
       {!hasLoaderRun && (
-        <div ref={mainLoader} className="fixed top-0 left-0 h-screen w-full bg-[#212121] overflow-hidden z-[9999]">
+        <div
+          ref={mainLoader}
+          className="fixed top-0 left-0 h-screen w-full bg-[#212121] overflow-hidden z-[9999]"
+        >
           <div
             ref={loader}
             className="loader h-full w-full absolute z-[3] bg-[#F1F1F1] lg:px-[6vh] px-[3.5vh] scale-75 rounded-xl"
@@ -188,22 +262,40 @@ const { pathname } = useLocation();
         </div>
       )}
 
-      {/* Transition overlay - shows on route changes after loader has run */}
+      {/* Transition overlay — pure black curtain, moving grain + tracking eyes */}
       {hasLoaderRun && (
         <div
           ref={transitionRef}
-          className="fixed top-0 left-0 h-screen w-full bg-[#212121] z-[500] overflow-hidden"
+          className="fixed top-0 left-0 h-screen w-full bg-black z-[9999] overflow-hidden"
           style={{ display: "none" }}
         >
-          <div className="absolute flex gap-2 scale-50 bottom-4 right-4">
+          <div
+            className="noise-layer absolute inset-0 opacity-20"
+            style={{ width: "130%", height: "130%", left: "-15%", top: "-15%" }}
+          >
+            <img
+              src="/noise.png"
+              className="w-full h-full object-cover"
+              alt=""
+            />
+          </div>
+
+          <div className="absolute flex gap-2 scale-75 opacity-80 bottom-4 right-4">
             <Eye rotate={rotate} />
             <Eye rotate={rotate} />
           </div>
         </div>
       )}
 
-      {/* Page content */}
-      <div ref={pageRef} key={pathname}>
+      {/* Page content — 3D depth context for transitions */}
+      <div
+        ref={pageRef}
+        style={{
+          perspective: "2000px",
+          transformStyle: "preserve-3d",
+          willChange: "transform, opacity, filter",
+        }}
+      >
         {children}
       </div>
     </>
