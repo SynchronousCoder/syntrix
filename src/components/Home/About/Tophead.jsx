@@ -16,33 +16,41 @@ const Tophead = () => {
       {
         y: 0,
         opacity: 1,
-        stagger: 0.02,
-        duration: 0.8, // smoother transition
-        ease: "power2.out", // soft easing
+        stagger: 0.025,
+        duration: 0.9,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 82%",
         },
-        // onComplete: () => onComplete?.()
       }
     );
-  },);
+  }, []);
 
   const renderText = (text) => {
     return text.split(" ").map((word, i) => (
-      <span key={i} className="word inline-block mr-[0.4vw]">
+      <span key={i} className="word inline-block mr-[0.35em] last:mr-0">
         {word}
       </span>
     ));
   };
 
   return (
-    <div ref={containerRef} className="lg:px-[6vh] px-[2vh]">
-      <h1 className="lg:text-[3vw] text-[7vw] font-[font2] leading-[1.3] flex flex-wrap max-w-[80ch] lg:gap-[0vh] gap-[.2vh]">
+    <div ref={containerRef} className="lg:px-[6vh] px-[4vw] pt-[1vh]">
+      <h2
+        className="
+          font-[font2] leading-[1.35]
+          text-[clamp(1.5rem,4.5vw,3vw)]
+          max-w-[34ch]
+          flex flex-wrap
+          gap-y-[0.2em]
+          text-black/90
+        "
+      >
         {renderText(
-          "We  craft  immersive  websites,  powerful  brand  identities,  and  digital  experiences  that  capture  attention,  drive  engagement,  and  fuel  lasting  growth."
+          "We craft immersive websites, powerful brand identities, and digital experiences that capture attention, drive engagement, and fuel lasting growth."
         )}
-      </h1>
+      </h2>
     </div>
   );
 };

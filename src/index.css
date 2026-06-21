@@ -136,3 +136,84 @@ body {
     animation: none !important;
   }
 }
+
+
+/*
+  about-extras.css
+  Add this import to your main CSS file (index.css / App.css).
+  These are non-Tailwind rules for the About section.
+*/
+
+/* ── Tilt card ────────────────────────────────────────────────── */
+.syntrix-card {
+  transition: box-shadow 0.4s ease;
+}
+.syntrix-card:hover {
+  /* On hover the card lifts — shadows deepen and spread */
+  box-shadow:
+    0 2px 0 0 rgba(255,255,255,0.60) inset,
+    0 -1px 0 0 rgba(0,0,0,0.12) inset,
+    1px 0 0 0 rgba(255,255,255,0.22) inset,
+    -1px 0 0 0 rgba(255,255,255,0.14) inset,
+    0 16px 48px rgba(0,0,0,0.22),
+    0 4px 12px rgba(0,0,0,0.14),
+    0 60px 100px rgba(0,0,0,0.12) !important;
+}
+
+/* ── Hero headline — fluid responsive type ───────────────────── */
+/*
+  The broken pattern was: clamp(2.4rem, 11vw, 5.2vw)
+  At 320px → min=38px, preferred=35px, max=83px → CSS picks MIN (38px = too big)
+  At 1920px → min=38px, preferred=211px, max=100px → CSS picks MAX (100px = correct)
+
+  Correct approach: clamp(min, fluid-vw, max) where min < max at all viewports.
+  We layer breakpoints for precise control at each target device.
+*/
+.hero-headline {
+  /* 320px–414px phones: compact, ~28-32px */
+  font-size: clamp(1.6rem, 7.5vw, 2rem);
+  line-height: 1.2;
+}
+
+@media (min-width: 415px) {
+  /* Large phones + phablets: 415px–767px */
+  .hero-headline {
+    font-size: clamp(2rem, 6.5vw, 2.8rem);
+    line-height: 1.18;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Tablets: 768px–1023px */
+  .hero-headline {
+    font-size: clamp(2.8rem, 5.5vw, 3.6rem);
+    line-height: 1.12;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop+: fluid from ~42px at 1024 up to ~90px at 1920 */
+  .hero-headline {
+    font-size: clamp(2.6rem, 4.7vw, 5.6rem);
+    line-height: 1;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .syntrix-card {
+    transition: none !important;
+    transform: none !important;
+  }
+  .social-link span {
+    transition: none !important;
+  }
+}
+
+/* ── Safe area on notched phones ─────────────────────────────── */
+@supports (padding: max(0px)) {
+  #aboutus {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
