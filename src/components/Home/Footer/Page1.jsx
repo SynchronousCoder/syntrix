@@ -23,15 +23,15 @@ const Page1 = ({ btnAnimation }) => {
 
   return (
     <>
-      <div className="min-h-screen h-fit w-full bg-[#57D4FF] rounded-tl-3xl rounded-tr-3xl text-[#212121]">
-        <div className="lg:h-[80vh] w-full flex flex-col justify-center items-center">
+      <div className="min-h-fit lg:min-h-screen w-full bg-[#57D4FF] rounded-tl-3xl rounded-tr-3xl text-[#212121]">
+        <div className="py-[10vh] lg:py-0 lg:h-[80vh] w-full flex flex-col justify-center items-center">
           <div className="relative font-[font1] flex flex-col text-center lg:text-[15vw] text-[22vw] lg:leading-[11vw] leading-[19vw] lg:px-0 px-[2vh] lg:mt-0 mt-[7vh]">
             <h1>READY</h1>
             <h1>TO START </h1>
             <h1>THE PROJECT ?</h1>
           </div>
         </div>
-        <Link to={"/contact"} className="flex justify-center">
+        <Link to={"/contact"} className="flex justify-center pb-[6vh] lg:pb-0">
           {btnAnimation({ char: "Start the project", key: 2 })}
         </Link>
       </div>

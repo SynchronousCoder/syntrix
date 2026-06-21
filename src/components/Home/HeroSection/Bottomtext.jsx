@@ -61,4 +61,4 @@ const Bottomtext = () => {
   );
 };
 
-export default Bottomtext;
+export default Bottomtext;  

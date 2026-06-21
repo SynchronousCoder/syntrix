@@ -164,7 +164,7 @@ const { pathname } = useLocation();
         <div ref={mainLoader} className="fixed top-0 left-0 h-screen w-full bg-[#212121] overflow-hidden z-[9999]">
           <div
             ref={loader}
-            className="loader h-full w-full absolute z-[3] bg-[#F1F1F1] px-[6vh] scale-75 rounded-xl"
+            className="loader h-full w-full absolute z-[3] bg-[#F1F1F1] lg:px-[6vh] px-[3.5vh] scale-75 rounded-xl"
           >
             <Hometext />
 
