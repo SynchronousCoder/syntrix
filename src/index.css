@@ -108,3 +108,31 @@ body {
   z-index: -1;
   mix-blend-mode: screen;
 }
+
+/*
+  Eyes Section — Floating Orb Animations
+  Add this to your global CSS file (e.g. index.css or App.css)
+  No Tailwind equivalent exists for custom keyframe animations.
+*/
+
+@keyframes orbFloat {
+  0%   { transform: translate(-50%, -50%) translateY(0px)   translateX(0px); }
+  25%  { transform: translate(-50%, -50%) translateY(-18px) translateX(10px); }
+  50%  { transform: translate(-50%, -50%) translateY(-8px)  translateX(-8px); }
+  75%  { transform: translate(-50%, -50%) translateY(-22px) translateX(6px); }
+  100% { transform: translate(-50%, -50%) translateY(0px)   translateX(0px); }
+}
+
+.orb-float {
+  animation-name: orbFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Respect reduced motion — no floating, no parallax */
+@media (prefers-reduced-motion: reduce) {
+  .orb-float {
+    animation: none !important;
+  }
+}
