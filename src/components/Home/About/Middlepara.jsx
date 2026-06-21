@@ -103,7 +103,7 @@ const TiltCard = ({ card, index }) => {
         WebkitBackdropFilter: "blur(28px) saturate(140%) brightness(0.92)",
         /* Layered shadows: ambient lift + tight contact shadow */
         boxShadow: `
-          0 2px 0 0 rgba(255,255,255,0.60) inset,
+          0 2px 0 0 rgba(255,255,255,0.50) inset,
           0 -1px 0 0 rgba(0,0,0,0.10) inset,
           1px 0 0 0 rgba(255,255,255,0.20) inset,
           -1px 0 0 0 rgba(255,255,255,0.12) inset,

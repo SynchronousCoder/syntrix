@@ -43,7 +43,7 @@ const Tophead = () => {
           text-[clamp(1.5rem,4.5vw,3vw)]
           max-w-[34ch]
           flex flex-wrap
-          gap-y-[0.2em]
+          gap-y-[0em]
           text-black/90
         "
       >
