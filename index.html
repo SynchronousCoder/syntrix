@@ -1,35 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- SEO — title aur description update karo -->
-    <title>Syntrix</title>
-    <meta name="description" content="Web design & motion-first agency for startups, creators, and bold brands." />
-    <meta name="google-site-verification" content="lfadVPmFP-tXpaqr1A0eV_zxHdAOhESqq9oDLQwd8Y0" />
 
-    <link rel="icon" type="image/svg+xml" href="./public/img/favicon.png" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <title>Syntrix — Web Design & Motion Agency</title>
+    <meta
+      name="description"
+      content="Web design & motion-first agency for startups, creators, and bold brands."
+    />
+    <meta
+      name="google-site-verification"
+      content="lfadVPmFP-tXpaqr1A0eV_zxHdAOhESqq9oDLQwd8Y0"
+    />
+
+    <!-- SEO extras -->
+    <meta
+      name="keywords"
+      content="web design agency, motion design, startup website, Syntrix"
+    />
+    <meta name="author" content="Syntrix" />
+    <link rel="canonical" href="https://syntrixdesign.vercel.app/" />
+
+    <!-- Open Graph (WhatsApp/LinkedIn preview) -->
+    <meta property="og:title" content="Syntrix — Web Design & Motion Agency" />
+    <meta
+      property="og:description"
+      content="Web design & motion-first agency for startups, creators, and bold brands."
+    />
+    <meta property="og:url" content="https://syntrixdesign.vercel.app/" />
+    <meta property="og:type" content="website" />
 
     <!-- Meta Pixel -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1010179254712800');
-    fbq('track', 'PageView');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1010179254712800");
+      fbq("track", "PageView");
     </script>
   </head>
   <body>
     <noscript>
-      <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1010179254712800&ev=PageView&noscript=1"/>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1010179254712800&ev=PageView&noscript=1"
+      />
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
