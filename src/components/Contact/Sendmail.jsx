@@ -65,6 +65,9 @@ const Sendmail = () => {
   const [selectedBudget, setSelectedBudget] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [agreedPrivacy, setAgreedPrivacy] = useState(false);
+  const [agreedAccuracy, setAgreedAccuracy] = useState(false);
+  const [checkError, setCheckError] = useState(false);
 
   // ── Form state ─────────────────────────────────────────────────────────
   const [formData, setFormData] = useState({
@@ -115,6 +118,12 @@ const Sendmail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
+
+    if (!agreedPrivacy || !agreedAccuracy) {
+      setCheckError(true);
+      return;
+    }
+    setCheckError(false);
 
     // Validation
     if (
@@ -558,7 +567,48 @@ const Sendmail = () => {
         </div>
 
         {/* ── Privacy + Submit ── */}
-        <div className="flex lg:flex-row flex-col lg:items-center items-start lg:justify-between mt-[6vh] pt-[2vh]">
+        <div className="mt-[6vh] pt-[4vh] border-t border-[#212121]/10">
+
+          {/* Checkboxes */}
+          <div className="flex flex-col gap-5 mb-10">
+
+            <label className="flex items-start gap-4 cursor-pointer group" onClick={() => { setAgreedPrivacy(v => !v); setCheckError(false); }}>
+              <div className={`mt-[2px] shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-300 ${agreedPrivacy ? "bg-[#212121] border-[#212121]" : checkError ? "border-red-400 bg-red-50" : "border-gray-300 group-hover:border-gray-600"}`}>
+                {agreedPrivacy && (
+                  <svg className="w-3 h-3 text-white" viewBox="0 0 12 10" fill="none">
+                    <path d="M1 5l3.5 3.5L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </div>
+              <span className="font-[font2] text-sm lg:text-base text-[#212121]/60 leading-relaxed select-none">
+                I agree to the{" "}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="text-[#212121] underline underline-offset-2 hover:opacity-50 transition-opacity duration-200">
+                  Privacy Policy
+                </a>{" "}
+                and consent to Syntrix collecting and storing my data to respond to this enquiry.
+              </span>
+            </label>
+
+            <label className="flex items-start gap-4 cursor-pointer group" onClick={() => { setAgreedAccuracy(v => !v); setCheckError(false); }}>
+              <div className={`mt-[2px] shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-300 ${agreedAccuracy ? "bg-[#212121] border-[#212121]" : checkError ? "border-red-400 bg-red-50" : "border-gray-300 group-hover:border-gray-600"}`}>
+                {agreedAccuracy && (
+                  <svg className="w-3 h-3 text-white" viewBox="0 0 12 10" fill="none">
+                    <path d="M1 5l3.5 3.5L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </div>
+              <span className="font-[font2] text-sm lg:text-base text-[#212121]/60 leading-relaxed select-none">
+                I confirm that the information provided is accurate and I am authorised to submit this enquiry on behalf of my organisation (if applicable).
+              </span>
+            </label>
+
+            {checkError && (
+              <p className="font-[font2] text-sm text-red-500 pl-9 animate-pulse">
+                Please accept both confirmations before submitting.
+              </p>
+            )}
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -619,5 +669,3 @@ const Sendmail = () => {
 };
 
 export default Sendmail;
-
-

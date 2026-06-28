@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Contact from "./pages/Contact/Contact";
 import Service from "./pages/Service/Service";
 import Aboutus from "./pages/About/Aboutus";
+import PrivacyPolicy from "./pages/Privacy/PrivacyPolicy";
 import { Route, Routes, useLocation } from "react-router-dom";
 import LoaderTransition from "./components/common/LoaderTransition";
 import { Analytics } from "@vercel/analytics/react";
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<Aboutus />} />
           <Route path="/services" element={<Service />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
         <Analytics />
         <SpeedInsights />
