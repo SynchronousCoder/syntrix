@@ -67,7 +67,7 @@ const FloatingPreview = () => {
 
   return (
     <div
-      className="block absolute right-[1vw] top-[10vh] w-[58vw] h-[70vh] z-[10]"
+      className="hidden lg:block absolute right-[1vw] top-[10vh] w-[58vw] h-[70vh] z-[10]"
       style={{ perspective: "1200px" }} // tighter perspective = more physical depth
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
