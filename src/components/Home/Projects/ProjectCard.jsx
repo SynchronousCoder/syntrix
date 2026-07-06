@@ -139,7 +139,7 @@ const ProjectCard = ({
             transition={{ ease: "easeInOut", duration: 0.35 }}
             className="w-full h-full object-cover object-top"
             src={img2}
-            alt={naxme2}
+            alt={name2}
           />
         </a>
       </motion.div>
