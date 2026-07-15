@@ -59,7 +59,6 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
         <Analytics />
-        <SpeedInsights />
       </LoaderTransition>
     </>
   );
