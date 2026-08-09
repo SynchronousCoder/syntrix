@@ -1,6 +1,6 @@
 {
+  "buildCommand": "npm run build && npx react-snap",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" },
-    { "buildCommand": "npm run build && npx react-snap"}
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
