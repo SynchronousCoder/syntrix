@@ -1,5 +1,4 @@
 {
-  "buildCommand": "npm run build && npx react-snap --dest dist --source dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
