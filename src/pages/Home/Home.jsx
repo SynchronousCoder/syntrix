@@ -57,7 +57,6 @@ const Home = () => {
       <Hero />
       <Marquee />
       <About btnAnimation={btnAnimation} />
-      <Eyes />
       <Featured />
       <Footer btnAnimation={btnAnimation} />
     </div>

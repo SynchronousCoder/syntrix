@@ -40,8 +40,7 @@ const Bottomtext = () => {
 
           {/* Icon button with scale effect */}
           <div className="lg:opacity-100 opacity-0  relative h-8 w-8 rounded-full border border-[#212121] flex items-center justify-center overflow-hidden">
-            <i className="ri-arrow-right-up-line text-xl font-light relative z-10 transition-colors duration-300 group-hover:text-white"></i>
-
+            <i className="ri-arrow-right-up-fill text-xl font-light relative z-10 transition-colors duration-300 group-hover:text-white"></i>
             {/* simple scale bg */}
             <span
               className="absolute inset-0 bg-black scale-0 group-hover:scale-100 
@@ -57,6 +56,7 @@ const Bottomtext = () => {
           <h1 className="scrollDown absolute">Scroll Down</h1>
         </div>
       </div>
+
     </div>
   );
 };

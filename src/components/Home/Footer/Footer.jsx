@@ -6,7 +6,7 @@ import Transparent from './Transparent'
 const Footer = ({ btnAnimation }) => {
   return (
     <div>
-      <Page1 btnAnimation={btnAnimation} />
+      {/* <Page1 btnAnimation={btnAnimation} /> */}
       <Transparent />
       <Page2 />
     </div>

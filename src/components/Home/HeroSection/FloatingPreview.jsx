@@ -2,48 +2,85 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+const REST_ROTATE_Y = -10;
+const REST_ROTATE_X = 4;
+const MAX_TILT_Y = 24; // degrees, left/right
+const MAX_TILT_X = 18; // degrees, up/down
+
+const REST_SHADOW = "drop-shadow(0px 32px 48px rgba(0,0,0,0.14))";
+
 const FloatingPreview = () => {
-  const cardRef = useRef(null);
+  const areaRef = useRef(null); // hover area
+  const wrapRef = useRef(null); // ambient float layer (y only)
+  const tiltRef = useRef(null); // tilt + scale layer
+  const imgRef = useRef(null);  // parallax + shadow layer
+  const quick = useRef(null);
   const isHovered = useRef(false);
 
-  useGSAP(() => {
-    // Ambient float — barely perceptible, like an object suspended in air.
-    // sine.inOut is the only easing that reads as "weightless" not "bouncy".
-    gsap.to(cardRef.current, {
-      y: -6,
-      repeat: -1,
-      yoyo: true,
-      duration: 4,
-      ease: "sine.inOut",
-    });
-  });
+  useGSAP(
+    () => {
+      // Perspective is applied directly on the rotating element,
+      // so the 3D depth is always visible.
+      gsap.set(tiltRef.current, {
+        transformPerspective: 1100,
+        transformOrigin: "50% 50%",
+        rotationY: REST_ROTATE_Y,
+        rotationX: REST_ROTATE_X,
+      });
 
-  const handleMouseMove = (e) => {
-    if (!isHovered.current) return;
+      // Ambient float lives on its own element so hover never kills it.
+      gsap.to(wrapRef.current, {
+        y: -6,
+        repeat: -1,
+        yoyo: true,
+        duration: 4,
+        ease: "sine.inOut",
+      });
 
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;  // 0 → 1
-    const y = (e.clientY - rect.top)  / rect.height; // 0 → 1
+      const opts = { duration: 0.6, ease: "power3.out" };
+      quick.current = {
+        rotY: gsap.quickTo(tiltRef.current, "rotationY", opts),
+        rotX: gsap.quickTo(tiltRef.current, "rotationX", opts),
+        imgX: gsap.quickTo(imgRef.current, "x", opts),
+        imgY: gsap.quickTo(imgRef.current, "y", opts),
+      };
+    },
+    { scope: areaRef },
+  );
 
-    // Max ±6deg — subtle enough to feel physical, not gamified.
-    gsap.to(cardRef.current, {
-      rotateY: (x - 0.5) * 12,
-      rotateX: -(y - 0.5) * 8,
-      duration: 0.8,         // slow follow = weight = premium
+  const handleMouseEnter = (e) => {
+    if (e.pointerType && e.pointerType === "touch") return;
+    isHovered.current = true;
+
+    gsap.to(tiltRef.current, {
+      scale: 1.04,
+      duration: 0.6,
       ease: "power2.out",
       overwrite: "auto",
     });
   };
 
-  const handleMouseEnter = () => {
-    isHovered.current = true;
+  const handleMouseMove = (e) => {
+    if (!isHovered.current || !quick.current) return;
 
-    // Lift toward user: scale + subtle y rise.
-    // duration 0.6 not 0.3 — luxury objects don't snap.
-    gsap.to(cardRef.current, {
-      scale: 1.025,
-      y: -14,
-      duration: 0.6,
+    const rect = areaRef.current.getBoundingClientRect();
+    // Normalised -1 → 1, measured from the center of the hover area.
+    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    // Mouse on the right  → right edge turns away (rotateY +)
+    // Mouse on the bottom → bottom edge turns away (rotateX −)
+    quick.current.rotY(REST_ROTATE_Y + nx * MAX_TILT_Y);
+    quick.current.rotX(REST_ROTATE_X - ny * MAX_TILT_X);
+
+    // Inner parallax shift for extra depth.
+    quick.current.imgX(nx * 16);
+    quick.current.imgY(ny * 12);
+
+    // Shadow slides opposite to the tilt, like a real light source.
+    gsap.to(imgRef.current, {
+      filter: `drop-shadow(${-nx * 26}px ${38 - ny * 16}px 60px rgba(0,0,0,0.28))`,
+      duration: 0.5,
       ease: "power2.out",
       overwrite: "auto",
     });
@@ -52,43 +89,51 @@ const FloatingPreview = () => {
   const handleMouseLeave = () => {
     isHovered.current = false;
 
-    // Weighted return — elastic would feel playful, power3 feels considered.
-    gsap.to(cardRef.current, {
+    gsap.to(tiltRef.current, {
       scale: 1,
-      y: 0,
-      rotateX: 4,
-      rotateY: -10,
-      duration: 1.0,
+      duration: 1,
       ease: "power3.out",
       overwrite: "auto",
-      delay: 0.05,
+    });
+
+    if (quick.current) {
+      quick.current.rotY(REST_ROTATE_Y);
+      quick.current.rotX(REST_ROTATE_X);
+      quick.current.imgX(0);
+      quick.current.imgY(0);
+    }
+
+    gsap.to(imgRef.current, {
+      filter: REST_SHADOW,
+      duration: 1,
+      ease: "power3.out",
+      overwrite: "auto",
     });
   };
 
   return (
     <div
+      ref={areaRef}
       className="hidden lg:block absolute right-[1vw] top-[10vh] w-[58vw] h-[70vh] z-[10]"
-      style={{ perspective: "1200px" }} // tighter perspective = more physical depth
-      onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div
-        ref={cardRef}
-        className="w-full h-full"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: "rotateY(-10deg) rotateX(4deg)",
-          willChange: "transform",
-        }}
-      >
-        <img
-          src="https://ik.imagekit.io/m9zi40oov/ogHero.png?updatedAt=1782332189820"
-          alt="Syntrix Preview"
-          className="w-full h-full object-contain select-none"
-          style={{ filter: "drop-shadow(0 32px 48px rgba(0,0,0,0.14))" }}
-          draggable={false}
-        />
+      <div ref={wrapRef} className="w-full h-full">
+        <div
+          ref={tiltRef}
+          className="w-full h-full"
+          style={{ willChange: "transform" }}
+        >
+          <img
+            ref={imgRef}
+            src="https://ik.imagekit.io/m9zi40oov/ogHero.png?updatedAt=1782332189820"
+            alt="Syntrix Preview"
+            className="w-full h-full object-contain select-none"
+            style={{ filter: REST_SHADOW, willChange: "transform, filter" }}
+            draggable={false}
+          />
+        </div>
       </div>
     </div>
   );

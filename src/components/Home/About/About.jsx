@@ -73,7 +73,7 @@ const About = ({ btnAnimation }) => {
       {/* Divider */}
       <div className="mt-[4vh] h-px w-full bg-white/40" />
 
-      <Lastpara btnAnimation={btnAnimation} />
+      <Lastpara />
     </div>
   );
 };

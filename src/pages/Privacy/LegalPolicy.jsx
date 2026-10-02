@@ -161,7 +161,7 @@ We take privacy seriously and will respond to all enquiries within 5 business da
   },
 ];
 
-const PrivacyPolicy = () => {
+const LegalPolicy  = () => {
   const heroRef    = useRef(null);
   const contentRef = useRef(null);
 
@@ -266,4 +266,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default LegalPolicy ;
