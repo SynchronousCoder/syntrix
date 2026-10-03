@@ -11,22 +11,22 @@ import * as THREE from "three";
 // Use full website screenshots (hosts must allow CORS). Use 3 to 8 items.
 const IMAGES = [
   {
-    url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/uiux/Frame%204C.png",
   },
   {
-    url: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/compress%20img/k72.png?updatedAt=1782026239284",
   },
   {
-    url: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/uiux/MacBook%20Pro%2016_%20-%201C.png",
   },
   {
-    url: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/compress%20img/coder.png?updatedAt=1782026239168",
   },
   {
-    url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/uiux/Frame%202.png",
   },
   {
-    url: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+    url: "https://ik.imagekit.io/m9zi40oov/aboutus.png?updatedAt=1782029051521",
   },
 ];
 
@@ -43,7 +43,7 @@ const INNER_WALL_BRIGHTNESS = "#9a9aa8"; // inside wall tint (white = same as ou
 const IMAGE_GAP = 0.025; // gap between images as a fraction of each panel (0 = touching, 0.15 = wide)
 
 // Glow that comes from the images themselves (set GLOW_STRENGTH = 0 for none)
-const GLOW_STRENGTH = 0.7; // 0 to 1
+const GLOW_STRENGTH = 0.65; // 0 to 1
 const GLOW_SPREAD = 1; // how far the glow reaches above and below (1 = none)
 
 // Section size (Tailwind classes). The cylinder is centered inside this area.
